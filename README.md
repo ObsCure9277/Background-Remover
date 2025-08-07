@@ -102,5 +102,6 @@ The Flask server will start at `http://localhost:5000`
 ### Access the Application
 
 > 🔑 Make sure `Backend Setup` is done and start the `Backend Server` before accessing the application.
+
 Live Preview 👉 <a href="https://cleanlayer.vercel.app">View Website</a>
 
