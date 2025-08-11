@@ -116,6 +116,7 @@ npm run dev
 ### Access the Application
 
 > 🔑 Make sure `Backend Setup` is done and start the `Backend Server` before accessing the application.
+
 Live Preview 👉 <a href="http://localhost:3000">http://localhost:3000</a>
 
 
