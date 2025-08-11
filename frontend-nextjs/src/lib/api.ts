@@ -1,4 +1,10 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// Use relative /api base so the actual backend origin is hidden behind Next.js rewrites.
+// Optional public override (e.g. when deployed without reverse proxy) via NEXT_PUBLIC_API_URL.
+const RAW_API = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE_URL = (
+  RAW_API && RAW_API !== 'undefined' && RAW_API !== 'null' ? RAW_API : '/api'
+).replace(/\/+$/, '');
 
 export interface ApiResponse {
   success: boolean;

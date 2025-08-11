@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -14,7 +14,11 @@ export const metadata: Metadata = {
   keywords:
     "AI, background remover, image processing, transparent background, photo editing",
   authors: [{ name: "Ng Shen Zhi" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
