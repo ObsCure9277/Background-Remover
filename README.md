@@ -74,7 +74,7 @@ A powerful web application that automatically removes backgrounds from images us
 - Node.js 18.17.0 or higher
 - Git
 
-### Quick Start
+### Installation
 ```bash
 git clone https://github.com/ObsCure9277/Background-Remover.git
 cd Background-Remover
@@ -97,11 +97,25 @@ python download_model.py
 cd backend
 python app.py
 ```
-The Flask server will start at `http://localhost:5000`
+
+### Frontend Setup
+```bash
+# Navigate to frontend directory
+cd frontend-nextjs
+
+# Install dependencies
+npm install
+```
+
+### Start the Frontend Server
+```bash
+cd frontend-nextjs
+npm run dev
+```
 
 ### Access the Application
 
 > 🔑 Make sure `Backend Setup` is done and start the `Backend Server` before accessing the application.
+Live Preview 👉 <a href="http://localhost:3000">http://localhost:3000</a>
 
-Live Preview 👉 <a href="https://cleanlayer.vercel.app">View Website</a>
 
