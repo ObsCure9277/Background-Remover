@@ -1,6 +1,6 @@
 # CleanLayer - AI Background Remover
 
-A powerful web application that automatically removes backgrounds from images using deep learning. Built with a Python Flask backend utilizing the U²-NET deep learning model and a modern Next.js frontend with React and TypeScript.
+A powerful web application that automatically removes backgrounds from images using **U²-NET** deep learning. Built with a **Python**, **Flask** backend and a modern **Next.js** frontend with **React**, **TypeScript** and **Tailwind CSS**.
 
 <img width="1876" height="928" alt="CleanLayer1" src="https://github.com/user-attachments/assets/56e1a717-26a2-42f7-8c25-ea93bcb8ff0d" />
 <img width="1876" height="932" alt="CleanLayer" src="https://github.com/user-attachments/assets/0a24ca55-5aa8-404c-bc7d-f3641d59c0c1" />
