@@ -46,7 +46,7 @@ const Export: React.FC<ExportProps> = ({
             style={{
               padding: "8px",
               borderRadius: "6px",
-              border: "2px solid var(--accent-color)",
+              border: "2px solid var(--border-color)",
               background: "var(--button-bg-color)",
               color: "var(--text-color)",
               fontWeight: "bold",
@@ -68,7 +68,7 @@ const Export: React.FC<ExportProps> = ({
             style={{
               padding: "8px",
               borderRadius: "6px",
-              border: "2px solid var(--accent-color)",
+              border: "2px solid var(--border-color)",
               background: "var(--button-bg-color)",
               color: "var(--text-color)",
               fontWeight: "bold",

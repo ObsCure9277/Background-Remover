@@ -6,6 +6,8 @@ const fs = require('fs');
 const os = require('os');
 const sharp = require("sharp"); // Use sharp for resizing
 
+const isDev = !app.isPackaged;
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1920,
@@ -19,18 +21,19 @@ function createWindow() {
     },
   });
 
+  if (isDev) {
+    win.webContents.openDevTools(); // Only open DevTools in development mode
+  }
+
   win.webContents.on('did-finish-load', () => {
     win.webContents.executeJavaScript(`
       document.documentElement.style.height = '100%';
       document.body.style.height = '100%';
-      document.body.style.display = 'flex';
-      document.body.style.justifyContent = 'center';
-      document.body.style.alignItems = 'center';
     `);
   });
 
   // Load the built Vite app
-  win.loadFile(path.join(__dirname, 'CleanLayer', 'dist', 'index.html'));
+  win.loadFile(path.join(__dirname, 'ImgPixel', 'dist', 'index.html'));
 
   // Listen for background removal requests from frontend
   ipcMain.handle('remove-background', async (event, inputPath, outputPath, resolution) => {

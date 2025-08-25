@@ -1,12 +1,12 @@
 :root {
-  --background-color: #2e2e2e; /* Dark industrial background */
-  --text-color: #f1f1f1; /* Light text for contrast */
-  --accent-color: #ff6f20; /* Vibrant accent color */
-  --border-color: #bec3c7; /* Subtle border color */
-  --button-bg-color: #3b3b3b; /* Button background color */
-  --button-hover-bg-color: #ff6f20; /* Button hover background color */
-  --button-text-color: #f1f1f1; /* Button text color */
-  --shadow-color: rgba(0, 0, 0, 0.5); /* Shadow color */
+  --background-color: #11181C; /* Bunker */
+  --text-color: #F8F9FA; /* Athens Gray */
+  --accent-color: #34B27B; /* Jungle Green */
+  --border-color: #F8F9FA; /* Athens Gray */
+  --button-bg-color: #000000; /* Black */
+  --button-hover-bg-color: #34B27B; /* Jungle Green */
+  --button-text-color: #F8F9FA; /* Athens Gray */
+  --shadow-color: rgba(0, 0, 0, 0.5); /* Black shadow */
 }
 
 body {

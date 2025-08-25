@@ -53,7 +53,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           fontSize: "1.2rem",
           marginBottom: 8,
           color: "var(--text-color)",
-          textAlign: "left", // Align text to the left
+          textAlign: "left",
         }}
       >
         Step 1: Select Image
@@ -67,7 +67,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             color: "var(--text-color)",
             borderRadius: "16px",
             padding: "48px 16px",
-            textAlign: "center", // Align content to the center
+            textAlign: "center",
             marginTop: "24px",
             marginBottom: "24px",
             cursor: "pointer",
@@ -101,30 +101,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         </div>
       ) : (
         <div style={{ textAlign: "left" }}>
-          <div
-            style={{ textAlign: "left", display: "flex", flexDirection: "row" }}
+          <p
+            style={{
+              fontWeight: "bold",
+              color: "var(--text-color)",
+              marginBottom: "16px",
+            }}
           >
-            <p
-              style={{
-                fontWeight: "bold",
-                color: "var(--text-color)",
-                marginBottom: "16px",
-              }}
-            >
-              Selected File:
-            </p>
-            <br />
-            <p
-              style={{
-                fontWeight: "bold",
-                color: "var(--accent-color)",
-                marginBottom: "16px",
-              }}
-            >
-              {file.name}
-            </p>
-          </div>
-
+            Selected File: {file.name}
+          </p>
           <div style={{ marginBottom: "16px" }}>
             <button
               onClick={clearFile}

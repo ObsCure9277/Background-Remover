@@ -5,6 +5,7 @@ import Export from "./components/Export";
 import ImageUpload from "./components/ImageUpload";
 import ImageComparizon from "./components/ImageComparizon";
 import { useState } from "react";
+import imgPixelLogo from "../public/assets/imgPixel_logo.svg"; // Import the logo
 
 function App() {
   const [outputFolder, setOutputFolder] = useState<string>("");
@@ -130,35 +131,49 @@ function App() {
         height: "100vh",
         width: "100vw",
         overflow: "hidden",
-        background: "#2e2e2e",
+        background: "var(--background-color)", // Bunker
       }}
     >
       {/* Left Side - 40% */}
       <div
         style={{
           flex: "1 1 40%", // Adjusted to 40%
-          background: "#2e2e2e",
-          borderRight: "6px solid #ff6f20",
+          background: "var(--background-color)", // Bunker
+          borderRight: "6px solid var(--accent-color)", // Jungle Green
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
           padding: "32px 24px",
-          color: "#f1f1f1",
+          color: "var(--text-color)", // Athens Gray
         }}
       >
-        <h2
-          style={{
-            fontWeight: "bold",
-            fontSize: "2rem",
-            color: "#ff6f20",
-            marginBottom: "32px",
-            alignSelf: "flex-start",
-            letterSpacing: "2px",
-            textShadow: "2px 2px 0 #bec3c7",
-          }}
-        >
-          CleanLayer
-        </h2>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "32px" }}>
+          <img
+            src={imgPixelLogo} 
+            alt="ImgPixel Logo"
+            style={{ width: "48px", height: "48px", marginRight: "12px" }}
+          />
+          <h2
+            style={{
+              fontWeight: "bold",
+              fontSize: "2rem",
+              color: "var(--accent-color)", // Jungle Green
+              textShadow: "2px 2px 0 var(--button-bg-color)", // Black
+            }}
+          >
+            Img
+          </h2>
+          <h2
+            style={{
+              fontWeight: "bold",
+              fontSize: "2rem",
+              color: "var(--button-text-color)",
+              textShadow: "2px 2px 0 var(--button-bg-color)",
+            }}
+          >
+            Pixel
+          </h2>
+        </div>
         <ImageUpload
           file={file}
           setFile={(fileOrNull) => {
@@ -180,7 +195,7 @@ function App() {
               fontWeight: "bold",
               fontSize: "1.2rem",
               marginBottom: 8,
-              color: "#f1f1f1",
+              color: "var(--text-color)", // Athens Gray
               textAlign: "left",
             }}
           >
@@ -197,12 +212,12 @@ function App() {
                 style={{
                   marginTop: 8,
                   fontSize: "0.95rem",
-                  color: "#ff6f20",
+                  color: "var(--accent-color)", // Jungle Green
                   textAlign: "left",
                 }}
               >
                 Output folder:{" "}
-                <span style={{ fontWeight: "bold", color: "#f1f1f1" }}>
+                <span style={{ fontWeight: "bold", color: "var(--text-color)" }}>
                   {outputFolder}
                 </span>
               </div>
@@ -223,7 +238,7 @@ function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#2e2e2e",
+          background: "var(--background-color)", // Bunker
           height: "100%",
         }}
       >

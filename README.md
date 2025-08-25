@@ -1,4 +1,4 @@
-# CleanLayer - AI Background Remover
+# ImgPixel - AI Background Remover
 
 A powerful desktop application that automatically removes backgrounds from images using **U²-NET** deep learning. Built with **Electron**, **React**, **TypeScript**, and **Python** for a seamless and efficient user experience.
 
