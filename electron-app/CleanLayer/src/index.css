@@ -1,0 +1,95 @@
+:root {
+  --background-color: #2e2e2e; /* Dark industrial background */
+  --text-color: #f1f1f1; /* Light text for contrast */
+  --accent-color: #ff6f20; /* Vibrant accent color */
+  --border-color: #bec3c7; /* Subtle border color */
+  --button-bg-color: #3b3b3b; /* Button background color */
+  --button-hover-bg-color: #ff6f20; /* Button hover background color */
+  --button-text-color: #f1f1f1; /* Button text color */
+  --shadow-color: rgba(0, 0, 0, 0.5); /* Shadow color */
+}
+
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  color: var(--text-color);
+}
+
+button {
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+button:hover {
+  background-color: var(--button-hover-bg-color);
+  color: var(--text-color);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-color);
+}
+button:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+input, select {
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--button-bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 4px 4px 0 var(--shadow-color);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 6px 6px 0 var(--shadow-color);
+  transform: translate(-2px, -2px);
+}
+
+.error-message {
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
