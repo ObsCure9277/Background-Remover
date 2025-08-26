@@ -6,7 +6,7 @@ contextBridge.exposeInMainWorld('electron', {
   },
 });
 
-// Suppress specific Autofill errors
+// Suppress Autofill-related errors
 const originalConsoleError = console.error;
 console.error = (...args) => {
   if (

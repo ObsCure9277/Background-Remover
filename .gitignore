@@ -19,6 +19,7 @@ venv.bak/
 
 # AI Models
 backend/models/
+models/
 *.pth
 *.pt
 *.onnx
@@ -67,3 +68,20 @@ out/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Electron Forge Build Artifacts
+out/
+dist/
+dist-ssr/
+*.local
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Sensitive Files
+config.json
+secrets.json
+credentials.json

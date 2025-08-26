@@ -3,7 +3,7 @@ import "./App.css";
 import OutputFolderSelect from "./components/OutputPathSelect";
 import Export from "./components/Export";
 import ImageUpload from "./components/ImageUpload";
-import ImageComparizon from "./components/ImageComparizon";
+import ImageComparison from "./components/ImageComparison";
 import { useState } from "react";
 import imgPixelLogo from "../public/assets/imgPixel_logo.svg"; // Import the logo
 
@@ -134,10 +134,10 @@ function App() {
         background: "var(--background-color)", // Bunker
       }}
     >
-      {/* Left Side - 40% */}
+      {/* Left Side - 30% */}
       <div
         style={{
-          flex: "1 1 40%", // Adjusted to 40%
+          flex: "1 1 30%", // Adjusted to 30%
           background: "var(--background-color)", // Bunker
           borderRight: "6px solid var(--accent-color)", // Jungle Green
           display: "flex",
@@ -234,7 +234,7 @@ function App() {
       {/* Right Side - 60% */}
       <div
         style={{
-          flex: "1 1 60%", // Adjusted to 60%
+          flex: "1 1 70%", // Adjusted to 60%
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -242,7 +242,7 @@ function App() {
           height: "100%",
         }}
       >
-        <ImageComparizon
+        <ImageComparison
           originalImage={uploadedFilePath ? `file://${uploadedFilePath}` : null} // Use the uploaded file path
           processedImage={resultPath ? `file://${resultPath}` : null}
         />

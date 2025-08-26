@@ -8,6 +8,18 @@ const sharp = require("sharp"); // Use sharp for resizing
 
 const isDev = !app.isPackaged;
 
+app.commandLine.appendSwitch('disable-features', 'Autofill');
+app.commandLine.appendSwitch('disable-features', 'AutofillProfile');
+
+async function ensureDirectoryExists(directoryPath) {
+  try {
+    await fs.promises.access(directoryPath);
+  } catch (err) {
+    // If access fails, create the directory
+    await fs.promises.mkdir(directoryPath, { recursive: true });
+  }
+}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1920,
@@ -20,10 +32,6 @@ function createWindow() {
       nodeIntegration: false,
     },
   });
-
-  if (isDev) {
-    win.webContents.openDevTools(); // Only open DevTools in development mode
-  }
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.executeJavaScript(`
@@ -85,11 +93,9 @@ function createWindow() {
 
   ipcMain.handle('save-uploaded-file', async (event, buffer, fileName) => {
     const uploadsDir = path.join(__dirname, 'uploads');
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir); // Create the uploads directory if it doesn't exist
-    }
+    await ensureDirectoryExists(uploadsDir); // Ensure the uploads directory exists
     const filePath = path.join(uploadsDir, fileName);
-    fs.writeFileSync(filePath, Buffer.from(buffer)); // Save the file to the uploads directory
+    await fs.promises.writeFile(filePath, Buffer.from(buffer)); // Save the file to the uploads directory
     return filePath; // Return the saved file path
   });
 
@@ -139,7 +145,7 @@ function createWindow() {
         height = 2160;
       } else {
         // If "original", just copy the file without resizing
-        fs.copyFileSync(srcPath, destPath);
+        await fs.promises.copyFile(srcPath, destPath);
         return destPath;
       }
 

@@ -1,12 +1,12 @@
 import React from "react";
 import { ImgComparisonSlider } from "@img-comparison-slider/react";
 
-interface ImageComparizonProps {
+interface ImageComparisonProps {
   originalImage: string | null;
   processedImage: string | null;
 }
 
-const ImageComparizon: React.FC<ImageComparizonProps> = ({
+const ImageComparison: React.FC<ImageComparisonProps> = ({
   originalImage,
   processedImage,
 }) => {
@@ -20,15 +20,6 @@ const ImageComparizon: React.FC<ImageComparizonProps> = ({
 
   return (
     <div style={{ width: "100%", maxWidth: "800px", maxHeight: "800px", margin: "0 auto" }}>
-      <h3
-        style={{
-          textAlign: "center",
-          fontWeight: "bold",
-          marginBottom: "16px",
-        }}
-      >
-        Image Comparison
-      </h3>
       <ImgComparisonSlider>
         <img
           slot="first"
@@ -47,4 +38,4 @@ const ImageComparizon: React.FC<ImageComparizonProps> = ({
   );
 };
 
-export default ImageComparizon;
+export default ImageComparison;
