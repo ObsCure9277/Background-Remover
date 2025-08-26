@@ -5,7 +5,7 @@ import Export from "./components/Export";
 import ImageUpload from "./components/ImageUpload";
 import ImageComparison from "./components/ImageComparison";
 import { useState } from "react";
-import imgPixelLogo from "../public/assets/imgPixel_logo.svg"; // Import the logo
+import imgPixelLogo from "../public/assets/imgPixel.png"; // Import the logo
 
 function App() {
   const [outputFolder, setOutputFolder] = useState<string>("");
