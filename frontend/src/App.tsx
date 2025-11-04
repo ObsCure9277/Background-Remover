@@ -112,8 +112,15 @@ function App() {
       {/* Header */}
       <header className="header">
         <div className="logo-container">
-          <h1 className="logo-text-green">Img</h1>
-          <h1 className="logo-text-white">Pixel</h1>
+          <img
+            src="/imgPixel.png"
+            alt="ImgPixel Logo"
+            className="logo-image"
+          />
+          <div className="logo-text-container">
+            <h1 className="logo-text-green">Img</h1>
+            <h1 className="logo-text-white">Pixel</h1>
+          </div>
         </div>
         <p className="tagline">Remove backgrounds with AI • Fast & Free</p>
       </header>
