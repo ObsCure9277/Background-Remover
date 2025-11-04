@@ -12,8 +12,18 @@ from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from background_removal import remove_background
+from download_model import download_model
 
 app = FastAPI(title="Background Remover API")
+
+# Download model on startup if it doesn't exist
+@app.on_event("startup")
+async def startup_event():
+    """Download model file if it doesn't exist"""
+    try:
+        download_model()
+    except Exception as e:
+        print(f"Warning: Could not download model: {e}")
 
 # CORS middleware
 app.add_middleware(
