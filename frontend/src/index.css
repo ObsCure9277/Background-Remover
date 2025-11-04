@@ -1,0 +1,71 @@
+:root {
+  --background-color: #11181C;
+  --text-color: #F8F9FA;
+  --accent-color: #34B27B;
+  --border-color: #F8F9FA;
+  --button-bg-color: #000000;
+  --button-hover-bg-color: #34B27B;
+  --button-text-color: #F8F9FA;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  color: var(--text-color);
+}
+
+button {
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: inherit;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-color);
+  color: var(--text-color);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--shadow-color);
+}
+
+button:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+input, select {
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}

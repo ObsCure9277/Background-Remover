@@ -85,3 +85,5 @@ temp/
 config.json
 secrets.json
 credentials.json
+
+.claude
