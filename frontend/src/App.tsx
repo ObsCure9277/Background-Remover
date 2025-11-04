@@ -4,7 +4,7 @@ import ImageUpload from "./components/ImageUpload";
 import ImageComparison from "./components/ImageComparison";
 import { useState } from "react";
 
-const API_BASE_URL = process.env.BACKEND_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.REACT_APP_BACKEND_API_URL || "http://localhost:8000";
 
 function App() {
   const [exportOptions, setExportOptions] = useState<{
