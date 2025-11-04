@@ -43,6 +43,7 @@ for directory in [UPLOAD_DIR, OUTPUT_DIR, MODELS_DIR]:
     directory.mkdir(parents=True, exist_ok=True)
 
 @app.get("/")
+@app.head("/")
 async def root():
     return {"message": "Background Remover API is running"}
 

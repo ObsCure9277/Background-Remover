@@ -5,6 +5,7 @@ import os
 import urllib.request
 from pathlib import Path
 import sys
+import ssl
 
 def download_with_progress(url, destination):
     """Download file with progress reporting"""
@@ -14,6 +15,11 @@ def download_with_progress(url, destination):
             percent = int(count * block_size * 100 / total_size)
             sys.stdout.write(f"\rDownloading: {percent}%")
             sys.stdout.flush()
+
+    # Create SSL context that doesn't verify certificates (for Google Drive)
+    context = ssl._create_unverified_context()
+    opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=context))
+    urllib.request.install_opener(opener)
 
     urllib.request.urlretrieve(url, destination, reporthook)
     print()  # New line after progress
@@ -35,8 +41,9 @@ def download_model():
 
     # List of download URLs to try
     urls = [
-        "https://huggingface.co/datasets/Xenova/u2net/resolve/main/u2net.pth",
-        "https://github.com/xuebinqin/U-2-Net/releases/download/v1.0/u2net.pth",
+        "https://drive.usercontent.google.com/download?id=1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ&export=download&confirm=t",
+        "https://huggingface.co/akhaliq/U-2-Net/resolve/main/u2net.pth",
+        "https://github.com/xuebinqin/U-2-Net/releases/download/model/u2net.pth",
     ]
 
     for i, url in enumerate(urls):
