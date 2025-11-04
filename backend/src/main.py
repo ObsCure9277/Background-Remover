@@ -46,6 +46,25 @@ for directory in [UPLOAD_DIR, OUTPUT_DIR, MODELS_DIR]:
 async def root():
     return {"message": "Background Remover API is running"}
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint - verifies API and model are ready"""
+    model_path = MODELS_DIR / "u2net.pth"
+    model_exists = model_path.exists()
+
+    status = {
+        "status": "healthy" if model_exists else "unhealthy",
+        "api": "running",
+        "model_loaded": model_exists,
+    }
+
+    if model_exists:
+        file_size_mb = model_path.stat().st_size / (1024 * 1024)
+        status["model_size_mb"] = round(file_size_mb, 1)
+        status["model_path"] = str(model_path)
+
+    return status
+
 @app.post("/api/remove-background")
 async def api_remove_background(
     file: UploadFile = File(...),
@@ -57,13 +76,24 @@ async def api_remove_background(
     - **file**: Image file (png, jpg, jpeg, gif, bmp, webp)
     - **resolution**: Output resolution (original, hd, fullhd, 4k)
     """
+    input_path = None
+    output_path = None
+
     try:
+        print(f"\n=== New background removal request ===")
+        print(f"Filename: {file.filename}")
+        print(f"Content-Type: {file.content_type}")
+        print(f"Resolution: {resolution}")
+
         # Validate file type
         allowed_extensions = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp"}
         file_ext = Path(file.filename).suffix.lower()
 
         if file_ext not in allowed_extensions:
-            raise HTTPException(status_code=400, detail="Invalid file type")
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid file type: {file_ext}. Allowed: {', '.join(allowed_extensions)}"
+            )
 
         # Generate unique filenames
         unique_id = str(uuid.uuid4())
@@ -74,20 +104,27 @@ async def api_remove_background(
         output_path = OUTPUT_DIR / output_filename
 
         # Save uploaded file
+        print(f"Saving uploaded file to {input_path}")
         with open(input_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
+
+        file_size_mb = input_path.stat().st_size / (1024 * 1024)
+        print(f"File saved successfully ({file_size_mb:.2f} MB)")
 
         # Check if model exists
         model_path = MODELS_DIR / "u2net.pth"
         if not model_path.exists():
-            # Clean up
+            print(f"ERROR: Model not found at {model_path}")
             input_path.unlink(missing_ok=True)
             raise HTTPException(
                 status_code=500,
-                detail="Model file not found. Please download the model first."
+                detail="Model file not found. Please wait for model download or contact support."
             )
 
+        print(f"Model found at {model_path}")
+
         # Process the image
+        print("Starting background removal process...")
         remove_background(
             str(input_path),
             str(output_path),
@@ -95,23 +132,44 @@ async def api_remove_background(
             model_path=str(model_path)
         )
 
+        # Verify output was created
+        if not output_path.exists():
+            raise Exception("Output file was not created")
+
+        output_size_mb = output_path.stat().st_size / (1024 * 1024)
+        print(f"Output file created successfully ({output_size_mb:.2f} MB)")
+
         # Clean up input file
         input_path.unlink(missing_ok=True)
+        print(f"Input file cleaned up")
 
+        print(f"=== Request completed successfully ===\n")
         return {
             "success": True,
             "output_file": output_filename,
             "message": "Background removed successfully"
         }
 
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
     except Exception as e:
-        # Clean up on error
-        if 'input_path' in locals():
-            input_path.unlink(missing_ok=True)
-        if 'output_path' in locals():
-            output_path.unlink(missing_ok=True)
+        print(f"ERROR: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
 
-        raise HTTPException(status_code=500, detail=str(e))
+        # Clean up on error
+        if input_path and input_path.exists():
+            input_path.unlink(missing_ok=True)
+            print("Cleaned up input file after error")
+        if output_path and output_path.exists():
+            output_path.unlink(missing_ok=True)
+            print("Cleaned up output file after error")
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Background removal failed: {str(e)}"
+        )
 
 @app.get("/api/download/{filename}")
 async def download_file(filename: str):

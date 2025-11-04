@@ -5,11 +5,28 @@ from u2net_model import U2NET
 import os
 
 def remove_background(input_path, output_path, resolution="original", model_path="models/u2net.pth"):
+    """Remove background from image using U2-Net model"""
+    print(f"Starting background removal for {input_path}")
+    print(f"Model path: {model_path}")
+    print(f"Resolution: {resolution}")
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"Using device: {device}")
+
+    # Load model
     net = U2NET(3, 1)
-    net.load_state_dict(torch.load(model_path, map_location=device))
+    try:
+        # Try loading with weights_only=False for compatibility
+        state_dict = torch.load(model_path, map_location=device, weights_only=False)
+        net.load_state_dict(state_dict)
+    except TypeError:
+        # Fallback for older PyTorch versions
+        state_dict = torch.load(model_path, map_location=device)
+        net.load_state_dict(state_dict)
+
     net.to(device)
     net.eval()
+    print("Model loaded successfully")
 
     image = Image.open(input_path).convert('RGB')
     orig_size = image.size
@@ -60,5 +77,7 @@ def remove_background(input_path, output_path, resolution="original", model_path
         print(f"Resizing image to resolution: {resolution}, size: {new_size}")
         result = result.resize(new_size, Image.LANCZOS)
 
+    # Save result
     result.save(output_path)
+    print(f"Background removed successfully. Output saved to {output_path}")
     return output_path
