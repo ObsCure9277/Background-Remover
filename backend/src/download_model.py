@@ -20,8 +20,8 @@ def download_with_progress(url, destination):
 
 def download_model():
     """Download the U2-Net model if it doesn't exist"""
-    models_dir = Path("models")
-    models_dir.mkdir(exist_ok=True)
+    models_dir = Path("src/models")
+    models_dir.mkdir(parents=True, exist_ok=True)
 
     model_path = models_dir / "u2net.pth"
 

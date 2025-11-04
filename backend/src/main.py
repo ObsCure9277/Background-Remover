@@ -35,12 +35,12 @@ app.add_middleware(
 )
 
 # Create directories
-UPLOAD_DIR = Path("uploads")
-OUTPUT_DIR = Path("outputs")
-MODELS_DIR = Path("models")
+UPLOAD_DIR = Path("src/uploads")
+OUTPUT_DIR = Path("src/outputs")
+MODELS_DIR = Path("src/models")
 
 for directory in [UPLOAD_DIR, OUTPUT_DIR, MODELS_DIR]:
-    directory.mkdir(exist_ok=True)
+    directory.mkdir(parents=True, exist_ok=True)
 
 @app.get("/")
 async def root():
@@ -198,4 +198,4 @@ async def cleanup_file(filename: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=5000)
