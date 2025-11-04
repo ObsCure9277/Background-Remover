@@ -108,87 +108,72 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        height: "100vh",
-        width: "100vw",
-        overflow: "hidden",
-        background: "var(--background-color)",
-      }}
-    >
-      {/* Left Side - 30% */}
-      <div
-        style={{
-          flex: "1 1 30%",
-          background: "var(--background-color)",
-          borderRight: "6px solid var(--accent-color)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          padding: "32px 24px",
-          color: "var(--text-color)",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "32px" }}>
-          <h2
-            style={{
-              fontWeight: "bold",
-              fontSize: "2rem",
-              color: "var(--accent-color)",
-              textShadow: "2px 2px 0 var(--button-bg-color)",
-            }}
-          >
-            Img
-          </h2>
-          <h2
-            style={{
-              fontWeight: "bold",
-              fontSize: "2rem",
-              color: "var(--button-text-color)",
-              textShadow: "2px 2px 0 var(--button-bg-color)",
-            }}
-          >
-            Pixel
-          </h2>
+    <div className="app-container">
+      {/* Header */}
+      <header className="header">
+        <div className="logo-container">
+          <h1 className="logo-text-green">Img</h1>
+          <h1 className="logo-text-white">Pixel</h1>
         </div>
-        <ImageUpload
-          file={file}
-          setFile={(fileOrNull) => {
-            if (fileOrNull) {
-              handleFileUpload(fileOrNull);
-            } else {
-              clearFile();
-            }
-          }}
-          processing={processing}
-          clearFile={clearFile}
-          handleRemoveBg={handleRemoveBg}
-          error={error}
-        />
-        {/* Step 2: Export */}
-        <Export
-          onExportOptionsChange={handleExportOptionsChange}
-          onDownloadImage={handleDownloadImage}
-          exportOptions={exportOptions}
-        />
-      </div>
-      {/* Right Side - 70% */}
-      <div
-        style={{
-          flex: "1 1 70%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "var(--background-color)",
-          height: "100%",
-        }}
-      >
-        <ImageComparison
-          originalImage={originalImageUrl}
-          processedImage={processedImageUrl}
-        />
+        <p className="tagline">Remove backgrounds with AI • Fast & Free</p>
+      </header>
+
+      {/* Main Content */}
+      <div className="main-content">
+        {/* Left Panel - Controls */}
+        <aside className="left-panel">
+          <div className="control-section">
+            <ImageUpload
+              file={file}
+              setFile={(fileOrNull) => {
+                if (fileOrNull) {
+                  handleFileUpload(fileOrNull);
+                } else {
+                  clearFile();
+                }
+              }}
+              processing={processing}
+              clearFile={clearFile}
+              handleRemoveBg={handleRemoveBg}
+              error={error}
+            />
+          </div>
+
+          <div className="control-section">
+            <Export
+              onExportOptionsChange={handleExportOptionsChange}
+              onDownloadImage={handleDownloadImage}
+              exportOptions={exportOptions}
+              disabled={!processedImageUrl}
+            />
+          </div>
+
+          {/* Feature List */}
+          <div className="features">
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>High-quality AI removal</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Up to 4K resolution</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Multiple export formats</span>
+            </div>
+          </div>
+        </aside>
+
+        {/* Right Panel - Preview */}
+        <main className="right-panel">
+          <div className="preview-container">
+            <ImageComparison
+              originalImage={originalImageUrl}
+              processedImage={processedImageUrl}
+            />
+          </div>
+        </main>
       </div>
     </div>
   );

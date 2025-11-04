@@ -10,30 +10,57 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
   originalImage,
   processedImage,
 }) => {
-  if (!originalImage || !processedImage) {
+  if (!originalImage && !processedImage) {
     return (
-      <div style={{ textAlign: "center", color: "var(--accent-color)", fontWeight: "bold" }}>
-        <p>Please upload an image and process it to compare.</p>
+      <div className="empty-state">
+        <div className="empty-state-icon">🖼️</div>
+        <h3 className="empty-state-title">No Image Yet</h3>
+        <p className="empty-state-text">
+          Upload an image and remove its background to see the comparison here
+        </p>
+      </div>
+    );
+  }
+
+  if (originalImage && !processedImage) {
+    return (
+      <div className="preview-single">
+        <div className="preview-label">Original Image</div>
+        <img
+          src={originalImage}
+          alt="Original"
+          className="preview-image"
+        />
+        <p className="preview-hint">
+          Click "Remove Background" to process your image
+        </p>
       </div>
     );
   }
 
   return (
-    <div style={{ width: "100%", maxWidth: "800px", maxHeight: "800px", margin: "0 auto" }}>
-      <ImgComparisonSlider>
-        <img
-          slot="first"
-          src={originalImage}
-          alt="Original"
-          style={{ width: "100%", height: "auto" }}
-        />
-        <img
-          slot="second"
-          src={processedImage}
-          alt="Processed"
-          style={{ width: "100%", height: "auto" }}
-        />
-      </ImgComparisonSlider>
+    <div className="comparison-wrapper">
+      <div className="comparison-labels">
+        <span className="label-original">Original</span>
+        <span className="label-processed">Background Removed</span>
+      </div>
+      <div className="comparison-slider">
+        <ImgComparisonSlider>
+          <img
+            slot="first"
+            src={originalImage!}
+            alt="Original"
+            className="comparison-image"
+          />
+          <img
+            slot="second"
+            src={processedImage!}
+            alt="Processed"
+            className="comparison-image"
+          />
+        </ImgComparisonSlider>
+      </div>
+      <p className="comparison-hint">Drag the slider to compare</p>
     </div>
   );
 };

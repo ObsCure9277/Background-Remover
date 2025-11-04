@@ -4,12 +4,14 @@ interface ExportProps {
   onExportOptionsChange: (options: { format: string; resolution: string }) => void;
   onDownloadImage: () => void;
   exportOptions: { format: string; resolution: string };
+  disabled?: boolean;
 }
 
 const Export: React.FC<ExportProps> = ({
   onExportOptionsChange,
   onDownloadImage,
   exportOptions,
+  disabled = false,
 }) => {
   const handleFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onExportOptionsChange({ ...exportOptions, format: e.target.value });
@@ -20,60 +22,34 @@ const Export: React.FC<ExportProps> = ({
   };
 
   return (
-    <div style={{ marginTop: 16, textAlign: "left" }}>
-      <div
-        style={{
-          fontWeight: "bold",
-          fontSize: "1.2rem",
-          marginBottom: 8,
-          color: "var(--text-color)",
-        }}
-      >
-        Step 2: Export
-      </div>
-      <div style={{ marginBottom: 12, color: "var(--accent-color)" }}>
-        Choose export format and resolution:
-      </div>
+    <div className="export-container">
+      <h3 className="section-title">
+        <span className="step-number">2</span>
+        Export Options
+      </h3>
 
-      <div style={{ marginBottom: 12, display: "flex", flexDirection: "column", gap: "16px" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <label style={{ color: "var(--text-color)", fontWeight: "bold", marginRight: 8 }}>
-            Format:
-          </label>
+      <div className="export-options">
+        <div className="option-group">
+          <label className="option-label">Format</label>
           <select
             value={exportOptions.format}
             onChange={handleFormatChange}
-            style={{
-              padding: "8px",
-              borderRadius: "6px",
-              border: "2px solid var(--border-color)",
-              background: "var(--button-bg-color)",
-              color: "var(--text-color)",
-              fontWeight: "bold",
-              width: "200px",
-            }}
+            className="select-input"
+            disabled={disabled}
           >
             <option value="png">PNG (transparent)</option>
             <option value="jpg">JPG</option>
             <option value="webp">WebP</option>
           </select>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <label style={{ color: "var(--text-color)", fontWeight: "bold", marginRight: 8 }}>
-            Resolution:
-          </label>
+
+        <div className="option-group">
+          <label className="option-label">Resolution</label>
           <select
             value={exportOptions.resolution}
             onChange={handleResolutionChange}
-            style={{
-              padding: "8px",
-              borderRadius: "6px",
-              border: "2px solid var(--border-color)",
-              background: "var(--button-bg-color)",
-              color: "var(--text-color)",
-              fontWeight: "bold",
-              width: "200px",
-            }}
+            className="select-input"
+            disabled={disabled}
           >
             <option value="original">Original</option>
             <option value="hd">HD (1280x720)</option>
@@ -85,19 +61,10 @@ const Export: React.FC<ExportProps> = ({
 
       <button
         onClick={onDownloadImage}
-        style={{
-          display: "inline-block",
-          background: "var(--accent-color)",
-          color: "var(--text-color)",
-          border: "2px solid var(--border-color)",
-          borderRadius: "6px",
-          padding: "8px 18px",
-          fontWeight: "bold",
-          boxShadow: "2px 2px 0 var(--shadow-color)",
-          marginTop: "8px",
-          cursor: "pointer",
-        }}
+        className="download-button"
+        disabled={disabled}
       >
+        <span className="button-icon">↓</span>
         Download Image
       </button>
     </div>

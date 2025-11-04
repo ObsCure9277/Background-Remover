@@ -46,118 +46,73 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   });
 
   return (
-    <div style={{ marginBottom: "10px", width: "100%" }}>
-      <div
-        style={{
-          fontWeight: "bold",
-          fontSize: "1.2rem",
-          marginBottom: 8,
-          color: "var(--text-color)",
-          textAlign: "left",
-        }}
-      >
-        Step 1: Select Image
-      </div>
+    <div className="upload-container">
+      <h3 className="section-title">
+        <span className="step-number">1</span>
+        Upload Image
+      </h3>
+
       {!file ? (
         <div
           {...getRootProps()}
-          style={{
-            border: "3px dashed var(--accent-color)",
-            background: "var(--button-bg-color)",
-            color: "var(--text-color)",
-            borderRadius: "16px",
-            padding: "48px 16px",
-            textAlign: "center",
-            marginTop: "24px",
-            marginBottom: "24px",
-            cursor: "pointer",
-            width: "100%",
-            maxWidth: "450px",
-          }}
+          className={`dropzone ${isDragActive ? "dropzone-active" : ""}`}
         >
           <input {...getInputProps()} />
-          <Upload
-            style={{
-              width: 48,
-              height: 48,
-              color: "var(--accent-color)",
-              marginBottom: 16,
-            }}
-          />
-          <h3
-            style={{
-              fontWeight: "bold",
-              fontSize: "1.3rem",
-              color: "var(--text-color)",
-            }}
-          >
+          <Upload className="upload-icon" size={56} />
+          <h3 className="dropzone-title">
             {isDragActive
               ? "Drop your image here"
-              : "Drag and drop or click to select image"}
+              : "Drag & drop or click to upload"}
           </h3>
-          <p style={{ color: "var(--accent-color)" }}>
+          <p className="dropzone-subtitle">
             PNG, JPG, JPEG, GIF, BMP, WEBP • Max 10MB
           </p>
         </div>
       ) : (
-        <div style={{ textAlign: "left" }}>
-          <p
-            style={{
-              fontWeight: "bold",
-              color: "var(--text-color)",
-              marginBottom: "16px",
-            }}
-          >
-            Selected File: {file.name}
-          </p>
-          <div style={{ marginBottom: "16px" }}>
+        <div className="file-selected">
+          <div className="file-info">
+            <div className="file-name">
+              <span className="file-icon">📁</span>
+              <span className="file-text">{file.name}</span>
+            </div>
+            <div className="file-size">
+              {(file.size / 1024 / 1024).toFixed(2)} MB
+            </div>
+          </div>
+
+          <div className="action-buttons">
             <button
               onClick={clearFile}
-              style={{
-                background: "var(--button-bg-color)",
-                color: "var(--text-color)",
-                border: "2px solid var(--border-color)",
-                borderRadius: "8px",
-                fontWeight: "bold",
-                padding: "8px 24px",
-                marginRight: "12px",
-                cursor: "pointer",
-              }}
+              className="button-secondary"
               disabled={processing}
             >
-              Choose Different Image
+              Change Image
             </button>
             <button
               onClick={handleRemoveBg}
-              style={{
-                background: "var(--button-bg-color)",
-                color: "var(--text-color)",
-                border: "2px solid var(--border-color)",
-                borderRadius: "8px",
-                fontWeight: "bold",
-                padding: "8px 24px",
-                cursor: "pointer",
-              }}
+              className="button-primary"
               disabled={processing}
             >
-              {processing ? "Processing..." : "Remove Background"}
+              {processing ? (
+                <>
+                  <span className="spinner"></span>
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <span className="button-icon">✨</span>
+                  Remove Background
+                </>
+              )}
             </button>
           </div>
         </div>
       )}
+
       {error && (
-        <div
-          style={{
-            marginTop: 16,
-            padding: "12px",
-            background: "var(--accent-color)",
-            color: "var(--text-color)",
-            borderRadius: "8px",
-            fontWeight: "bold",
-          }}
-        >
-          <AlertCircle style={{ marginRight: 8 }} />
-          {error}
+        <div className="error-message">
+          <AlertCircle size={20} />
+          <span>{error}</span>
         </div>
       )}
     </div>
