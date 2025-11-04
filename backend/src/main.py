@@ -3,9 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
+import sys
 import uuid
 import shutil
 from pathlib import Path
+
+# Add the src directory to Python path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from background_removal import remove_background
 
 app = FastAPI(title="Background Remover API")
