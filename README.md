@@ -1,6 +1,6 @@
 # ImgPixel - AI Background Remover
 
-A powerful desktop application that automatically removes backgrounds from images using **U²-NET** deep learning. Built with **Electron**, **React**, **TypeScript**, and **Python** for a seamless and efficient user experience.
+A powerful website that automatically removes backgrounds from images using **U²-NET** deep learning. Built with **React**, **TypeScript**, and **Python** for a seamless and efficient user experience.
 
 <img width="1889" height="950" alt="imgPixel_1" src="https://github.com/user-attachments/assets/546fd32c-39e3-4566-b4a7-4e7148dabd87" />
 <img width="1889" height="948" alt="imgPixel_2" src="https://github.com/user-attachments/assets/326ecc82-24de-4447-938a-c4c0ded98d46" />
